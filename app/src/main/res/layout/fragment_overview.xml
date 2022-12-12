@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="detailsViewModel"
+            type="com.example.movieworld.viewmodels.DetailsViewModel" />
+
+        <variable
+            name="movieById"
+            type="com.example.movieworld.models.moviebyid.MovieById" />
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        app:layoutDescription="@xml/fragment_overview_xml_constraintlayout_scene"
+        tools:context=".ui.fragments.overview.OverviewFragment">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/extended_fab_trailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:contentDescription="@string/trailer"
+            android:text="@string/trailer"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textStyle="bold|italic"
+            app:backgroundTint="#B3FF4646"
+            app:icon="@drawable/youtube_activity"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            progressBarVisibility="@{detailsViewModel.movieResponse}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <ImageView
+            android:id="@+id/image_view_error"
+            errorImageViewVisibility="@{detailsViewModel.movieResponse}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:alpha="0.5"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_sad"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32999998"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/text_view_error"
+            errorTextViewVisibility="@{detailsViewModel.movieResponse}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.5"
+            android:gravity="center_horizontal"
+            android:text="@string/something_went_wrong"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/image_view_error"
+            app:layout_constraintStart_toStartOf="@+id/image_view_error"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_error" />
+
+        <ImageView
+            android:id="@+id/image_view_photo"
+            loadImageFromUrl="@{movieById.image}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@color/black"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/movie"
+            tools:visibility="gone" />
+
+        <View
+            android:id="@+id/view_background"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:background="@drawable/background_gradient_black"
+            app:layout_constraintBottom_toBottomOf="@id/image_view_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_ratings"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/view_background"
+            app:layout_constraintEnd_toEndOf="@id/view_background"
+            app:layout_constraintStart_toStartOf="@id/view_background"
+            app:layout_constraintTop_toTopOf="@id/view_background"
+            tools:ignore="RtlSymmetry">
+
+            <ImageView
+                isImdbRatingValid="@{detailsViewModel.movieResponse.data.imDbRating}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_baseline_star_24"
+                app:tint="@color/yellow" />
+
+            <TextView
+                android:id="@+id/text_view_ratings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:autoSizeTextType="uniform"
+                android:paddingStart="5dp"
+                android:text="@{detailsViewModel.movieResponse.data.imDbRating}"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                tools:ignore="RtlSymmetry"
+                tools:targetApi="o"
+                tools:text="8.0" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:text="@{detailsViewModel.movieResponse.data.title}"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_photo"
+            tools:text="The walking dead" />
+
+        <LinearLayout
+            android:id="@+id/constraint_layout_details"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_title">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_under_title"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                app:dividerColor="@color/white" />
+
+            <HorizontalScrollView
+                android:id="@+id/scroll_view_meal_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_genres"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:checkedChip="@+id/chip_main_course"
+                        app:selectionRequired="true"
+                        app:singleLine="true"
+                        app:singleSelection="true">
+
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/text_view_plot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:justificationMode="inter_word"
+                android:text="@{detailsViewModel.movieResponse.data.plot}"
+                android:textColor="@color/white"
+                android:textStyle="italic"
+                tools:targetApi="o" />
+
+            <LinearLayout
+                android:id="@+id/linear_layout_directors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="@color/dividerColor"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/text_view_directors"
+                    setTextDirectors="@{movieById.directorList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/white"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_writers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="@color/dividerColor"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/text_view_writers"
+                    setTextWriters="@{movieById.writerList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/white"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="@color/dividerColor"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/text_view_release_date"
+                    setTextReleaseDate="@{movieById.releaseDate}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/white"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_awards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="@color/dividerColor"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/text_view_awards"
+                    setTextAwards="@{movieById.awards}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/white"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_budget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="@color/dividerColor"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/text_view_budget"
+                    setTextBudget="@{movieById.boxOffice}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/white"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_runtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="@color/dividerColor"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/text_view_runtime"
+                    setTextRuntime="@{movieById.runtimeMins}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/white"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_keywords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="@color/dividerColor"
+                    app:dividerThickness="1dp" />
+
+                <TextView
+                    android:id="@+id/text_view_keywords"
+                    setTextKeywords="@{movieById.keywordList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/white"
+                    tools:targetApi="o" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

@@ -1,0 +1,50 @@
+<resources>
+    <!-- Base application theme. -->
+    <!--    <style name="Theme.MovieWorld" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
+    <!--    <style name="Theme.MovieWorld" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
+    <style name="Theme.MovieWorld" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="android:windowBackground">@color/black</item> //remove blinking when switching items in bottom navigation bar
+        <item name="actionModeBackground">@color/contextualActionBarColor</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="actionModeCloseButtonStyle">@style/backButtonColor</item>
+    </style>
+
+    <style name="backButtonColor" parent="Widget.AppCompat.Light.ActionButton.CloseMode">
+        <item name="android:tint">@color/white</item> <!-- whatever color -->
+    </style>
+
+    <style name="SearchTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/white</item>
+        <item name="boxStrokeWidth">@color/white</item>
+    </style>
+
+    <style name="DetailsActivityStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="colorControlNormal">@color/yellow</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
+    <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="background">@color/actionBarBackgroundColor</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+    </style>
+
+    <style name="CustomTabTextStyle" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+<!--    <style name="CustomToolbarStyle" parent="ThemeOverlay.Material3.Toolbar.Surface" >-->
+<!--        <item name="android:textColorSecondary">@color/white</item>"-->
+<!--        <item name="colorOnPrimary">@color/yellow</item>"-->
+<!--        <item name="android:titleTextColor">@color/yellow</item>"-->
+<!--    </style>-->
+
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="2000">
+       <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/image_view_photo"
+               motion:framePosition="70"
+               android:alpha="0.8" />
+           <KeyAttribute
+               motion:motionTarget="@+id/constraint_layout_details"
+               motion:framePosition="70"
+               android:alpha="0.2" />
+       </KeyFrameSet>
+        <OnSwipe
+            motion:touchAnchorId="@+id/image_view_photo"
+            motion:touchAnchorSide="bottom" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/constraint_layout_details"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/image_view_photo"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0" />
+        <Constraint
+            android:layout_height="1dp"
+            motion:layout_constraintBottom_toBottomOf="@id/view_background"
+            android:layout_width="0dp"
+            android:alpha="0"
+            android:id="@+id/layout_ratings"
+            motion:layout_constraintTop_toTopOf="@id/view_background"
+            motion:layout_constraintEnd_toEndOf="@id/view_background"
+            motion:layout_constraintStart_toStartOf="@id/view_background"/>
+        <Constraint
+            android:id="@+id/constraint_layout_details"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:alpha="1"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/text_view_title"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/extended_fab_trailer"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            android:layout_marginBottom="32dp"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+</MotionScene>

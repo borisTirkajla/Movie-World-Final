@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="favoriteMoviesViewModel"
+            type="com.example.movieworld.viewmodels.FavoriteMoviesViewModel" />
+        <variable
+            name="mAdapter"
+            type="com.example.movieworld.adapters.MovieFavoriteListAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:paddingHorizontal="5dp"
+        tools:context=".ui.fragments.favoritemovies.FavoriteMoviesFragment">
+
+<!--        <com.facebook.shimmer.ShimmerFrameLayout-->
+<!--            android:id="@+id/shimmerFrameLayout"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            isShimmerVisible="@{favoriteMoviesViewModel.readFavoriteMovies}"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:visibility="invisible">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1000dp"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <include layout="@layout/movie_row_placeholder_layout" />-->
+
+<!--                <include layout="@layout/movie_row_placeholder_layout" />-->
+
+<!--                <include layout="@layout/movie_row_placeholder_layout" />-->
+
+<!--                <include layout="@layout/movie_row_placeholder_layout" />-->
+
+<!--                <include layout="@layout/movie_row_placeholder_layout" />-->
+<!--            </LinearLayout>-->
+
+<!--        </com.facebook.shimmer.ShimmerFrameLayout>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            viewVisibility="@{favoriteMoviesViewModel.readFavoriteMovies}"
+            setData="@{mAdapter}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view_no_data"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:alpha="0.5"
+            viewVisibility="@{favoriteMoviesViewModel.readFavoriteMovies}"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_baseline_local_movies_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32999998"
+            app:tint="@color/white"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/text_view_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.5"
+            viewVisibility="@{favoriteMoviesViewModel.readFavoriteMovies}"
+            android:gravity="center_horizontal"
+            android:text="@string/no_favorite_movies"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/image_view_no_data"
+            app:layout_constraintStart_toStartOf="@id/image_view_no_data"
+            app:layout_constraintTop_toBottomOf="@id/image_view_no_data"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
