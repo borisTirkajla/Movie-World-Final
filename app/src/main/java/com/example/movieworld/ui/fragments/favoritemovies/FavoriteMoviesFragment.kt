@@ -27,7 +27,6 @@ private const val TAG = "FavoriteMoviesFragment"
 @AndroidEntryPoint
 class FavoriteMoviesFragment : Fragment() {
 
-    private val mainViewModel: MainViewModel by viewModels()
     private val favoriteMoviesViewModel: FavoriteMoviesViewModel by activityViewModels()
 
     private var _binding: FragmentFavoriteMoviesBinding? = null

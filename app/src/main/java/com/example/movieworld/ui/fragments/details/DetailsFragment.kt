@@ -63,7 +63,7 @@ class DetailsFragment : Fragment() {
 
         if (savedMovie == null) {
             arguments?.getString(Constants.BUNDLE_ID)?.let { id ->
-//                detailsViewModel.movieId = id
+                detailsViewModel.movieId = id
                 detailsViewModel.findMovieById(id)
             }
         }
@@ -135,7 +135,8 @@ class DetailsFragment : Fragment() {
                 }
                 favoriteMovies.forEach { favoriteMovieEntity ->
                     val isMovieFavorite =
-                        favoriteMovieEntity.id == detailsViewModel.movieResponse.value?.data?.id
+//                        favoriteMovieEntity.id == detailsViewModel.movieResponse.value?.data?.id
+                        favoriteMovieEntity.id == detailsViewModel.movieId
                     if (isMovieFavorite) {
                         isFavorite = true
                     }

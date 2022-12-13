@@ -1,6 +1,5 @@
 package com.example.movieworld.viewmodels
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +16,8 @@ class TrailerViewModel @Inject constructor(
 
     val trailerUrl: MutableLiveData<String?> =
         MutableLiveData()
+
+    var shouldPlayTrailer = false
 
     fun getTrailerById(id: String) {
         viewModelScope.launch (Dispatchers.IO) {

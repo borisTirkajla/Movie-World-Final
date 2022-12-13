@@ -21,9 +21,11 @@ class PlayerActivity : YouTubeBaseActivity() {
 
 
         val trailerUrl = intent.extras?.getString("trailerUrl")
+        val movieTitle = intent.extras?.getString("title")
         if (!trailerUrl.isNullOrEmpty()) {
             playYouTubeTrailer(trailerUrl)
         }
+        binding.textViewTitle.text = movieTitle
     }
 
     private fun playYouTubeTrailer(videoUrl: String) {
@@ -35,7 +37,7 @@ class PlayerActivity : YouTubeBaseActivity() {
                 p1: YouTubePlayer?,
                 p2: Boolean
             ) {
-                p1?.setFullscreen(true)
+//                p1?.setFullscreen(true)
                 p1?.loadVideo(mVideoUrl)
             }
 

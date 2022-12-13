@@ -30,8 +30,8 @@
             android:contentDescription="@string/trailer"
             android:text="@string/trailer"
             android:textColor="@color/white"
-            android:visibility="gone"
             android:textStyle="bold|italic"
+            android:visibility="gone"
             app:backgroundTint="#B3FF4646"
             app:icon="@drawable/youtube_activity"
             app:iconTint="@color/white"
@@ -197,10 +197,8 @@
                         android:id="@+id/chip_group_genres"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:checkedChip="@+id/chip_main_course"
-                        app:selectionRequired="true"
-                        app:singleLine="true"
-                        app:singleSelection="true">
+                        android:clickable="false"
+                        app:singleLine="true">
 
                     </com.google.android.material.chip.ChipGroup>
                 </LinearLayout>

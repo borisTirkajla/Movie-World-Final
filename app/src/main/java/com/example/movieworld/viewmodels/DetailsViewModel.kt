@@ -26,6 +26,7 @@ class DetailsViewModel @Inject constructor(
     val movieResponse: MutableLiveData<NetworkResult<MovieById>> =
         MutableLiveData()
 
+    var movieId: String? = null
 //    val trailerUrl: MutableLiveData<UrlResult<String>> = MutableLiveData()
 var trailerUrl: UrlResult<String> = UrlResult.Loading()
 
