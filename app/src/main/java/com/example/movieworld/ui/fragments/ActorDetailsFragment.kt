@@ -15,5 +15,5 @@ class ActorDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_actor_details, container, false)
     }
-    
+
 }

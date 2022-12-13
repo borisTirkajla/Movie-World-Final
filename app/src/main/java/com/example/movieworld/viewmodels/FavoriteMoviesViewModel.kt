@@ -10,6 +10,7 @@ import com.example.movieworld.data.Repository
 import com.example.movieworld.data.database.entities.FavoriteMovieEntity
 import com.example.movieworld.models.moviebyid.MovieById
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

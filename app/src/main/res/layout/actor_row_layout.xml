@@ -97,55 +97,56 @@
                         android:ellipsize="end"
                         android:gravity="center_horizontal"
                         android:justificationMode="inter_word"
-                        android:text="@{actor.asCharacter}"
+                        actorNameInMovie="@{actor.asCharacter}"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/divider"
-                        tools:text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" />
+                        tools:text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"
+                        tools:targetApi="o" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/background_gradient_90"
-                        app:layout_constraintBottom_toBottomOf="@+id/text_view_description"
-                        app:layout_constraintEnd_toEndOf="@id/text_view_description"
-                        app:layout_constraintStart_toStartOf="@id/text_view_description">
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:background="@drawable/background_gradient_90"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/text_view_description"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/text_view_description"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/text_view_description">-->
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/background_gradient_180"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/text_view_description"
-                        app:layout_constraintStart_toStartOf="parent">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:background="@drawable/background_gradient_180"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/text_view_description"-->
+<!--                        app:layout_constraintStart_toStartOf="parent">-->
 
-                        <TextView
-                            android:id="@+id/text_view_details"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end"
-                            android:text="@string/see_more_details"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/black"
-                            android:textStyle="italic|bold" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/text_view_details"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:gravity="center_vertical|end"-->
+<!--                            android:text="@string/see_more_details"-->
+<!--                            android:textAlignment="textEnd"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textStyle="italic|bold" />-->
 
-                        <ImageView
-                            android:id="@+id/image_view_arrow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_arrow_right_24"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/text_view_details"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </LinearLayout>
+<!--                        <ImageView-->
+<!--                            android:id="@+id/image_view_arrow"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/ic_baseline_arrow_right_24"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/text_view_details"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+<!--                    </LinearLayout>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,7 +3,6 @@ package com.example.movieworld.ui.fragments.details
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -56,6 +55,7 @@ class DetailsFragment : Fragment() {
 
         try {
             savedMovie = arguments?.getParcelable(Constants.BUNDLE_MOVIE_BY_ID)!!
+            detailsViewModel.movieId = savedMovie.id
             detailsViewModel.setMovieResponseFromLocalDatabase(savedMovie)
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
@@ -95,7 +95,7 @@ class DetailsFragment : Fragment() {
     private fun setToolbar() {
 
         val menu = binding.toolbar.menu
-        checkSavedRecipes(menu)
+        checkSavedMovies(menu)
 
         binding.toolbar.setTitleTextColor(
             ContextCompat.getColor(
@@ -123,7 +123,7 @@ class DetailsFragment : Fragment() {
 
 
 
-    private fun checkSavedRecipes(menu: Menu) {
+    private fun checkSavedMovies(menu: Menu) {
         favoriteMoviesViewModel.readFavoriteMovies.observe(viewLifecycleOwner) { favoriteMovies ->
             try {
                 isFavorite = false

@@ -65,78 +65,13 @@ class FavoriteMoviesFragment : Fragment() {
         binding.mAdapter = mAdapter
         setupRecyclerView(binding.recyclerview)
 
-//        favoriteMoviesViewModel.readFavoriteMovies.observe(viewLifecycleOwner) { favoriteMovies ->
-//            val list = getTransformedList(favoriteMovies)
-//            mAdapter.setData(list)
-//            hideShimmerEffect()
-//        }
     }
 
-//    private fun getTransformedList(favoriteMovies: List<FavoriteMovieEntity>): List<MovieById> {
-//        val list = arrayListOf<MovieById>()
-//        if (favoriteMovies.isNotEmpty()) {
-//            favoriteMovies.forEach { favoriteMovieEntity ->
-//                favoriteMovieEntity.movie.apply {
-//                    list.add(
-//                        MovieById(
-//                            actorList = actorList,
-//                            awards = awards,
-//                            boxOffice = boxOffice,
-//                            directorList = directorList,
-//                            directors = directors,
-//                            errorMessage = errorMessage,
-//                            fullTitle = fullTitle,
-//                            genreList = genreList,
-//                            genres = genres,
-//                            id = id,
-//                            imDbRating = imDbRating,
-////                            imDbRatingVotes = imDbRatingVotes,
-//                            image = image,
-//                            keywordList = keywordList,
-//                            plot = plot,
-//                            releaseDate = releaseDate,
-//                            runtimeMins = runtimeMins,
-//                            runtimeStr = runtimeStr,
-//                            similars = similars,
-//                            starList = starList,
-//                            stars = stars,
-//                            title = title,
-//                            writerList = writerList,
-//                            writers = writers,
-//                            year = year
-//                        )
-//                    )
-//                }
-//            }
-//        } else {
-//            Toast.makeText(
-//                requireContext(),
-//                "Please add some favorite movies.",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//            hideShimmerEffect()
-//        }
-//        return list
-//    }
-
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-//        showShimmerEffect()
         recyclerView.apply {
             adapter = mAdapter
         }
     }
-
-//    private fun showShimmerEffect() {
-//        binding.shimmerFrameLayout.visibility = View.VISIBLE
-//        binding.shimmerFrameLayout.startShimmer()
-//        binding.recyclerview.visibility = View.GONE
-//    }
-//
-//    private fun hideShimmerEffect() {
-//        binding.shimmerFrameLayout.visibility = View.INVISIBLE
-//        binding.recyclerview.visibility = View.VISIBLE
-//        binding.shimmerFrameLayout.stopShimmer()
-//    }
 
     override fun onDestroy() {
         super.onDestroy()
