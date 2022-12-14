@@ -8,7 +8,6 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import com.example.movieworld.R
 import com.example.movieworld.databinding.ActorRowLayoutBinding
-import com.example.movieworld.models.moviebygenre.Movie
 import com.example.movieworld.models.moviebyid.Actor
 import com.example.movieworld.util.MovieDiffUtil
 
@@ -17,7 +16,7 @@ class ActorsListAdapter(private val onItemClicked: (id: String) -> Unit) :
 
     private var actorList = emptyList<Actor>()
 
-    class ViewHolder(private val binding: com.example.movieworld.databinding.ActorRowLayoutBinding) :
+    class ViewHolder(private val binding: ActorRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(actor: Actor) {
 

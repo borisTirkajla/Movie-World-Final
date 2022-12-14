@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
@@ -16,10 +15,10 @@ import com.example.movieworld.adapters.MovieListAdapter
 import com.example.movieworld.databinding.FragmentMovieListBinding
 import com.example.movieworld.util.Constants.DEFAULT_GENRE
 import com.example.movieworld.util.Constants.DEFAULT_GENRE_ID
+import com.example.movieworld.util.GenresEnum
 import com.example.movieworld.util.NetworkListener
 import com.example.movieworld.util.NetworkResult
 import com.example.movieworld.util.observeOnce
-import com.example.movieworld.viewmodels.FavoriteMoviesViewModel
 import com.example.movieworld.viewmodels.MainViewModel
 import com.example.movieworld.viewmodels.MovieListViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -212,39 +211,3 @@ class MovieListFragment : Fragment() {
         _binding = null
     }
 }
-
-enum class GenresEnum(val genre: String) {
-    Action("Action"),
-    Adventure("Adventure"),
-    Animation("Animation"),
-    Biography("Biography"),
-    Comedy("Comedy"),
-    Crime("Crime"),
-    Documentary("Documentary"),
-    Drama("Drama"),
-    Family("Family"),
-    Fantasy("Fantasy"),
-    History("History"),
-    Horror("Horror"),
-    Music("Music"),
-    Musical("Musical"),
-    Mystery("Mystery"),
-    Romance("Romance"),
-    SciFi("Sci - Fi"),
-    Sport("Sport"),
-    Thriller("Thriller"),
-    War("War"),
-    Western("Western");
-
-    companion object {
-        fun getValues(): Array<String> {
-            val list = mutableListOf<String>()
-            values().forEach {
-                list.add(it.name)
-            }
-            return list.toTypedArray()
-        }
-
-    }
-}
-

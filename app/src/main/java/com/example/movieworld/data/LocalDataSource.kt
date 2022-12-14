@@ -15,22 +15,17 @@ class LocalDataSource @Inject constructor(
         return moviesDao.readMovies()
     }
 
-//    fun readFavoriteMovies(): Flow<List<FavoriteMovieEntity>> {
-//        return moviesDao.readFavoriteMovies()
-//    }
-
     fun readFavoritesMovies(): Flow<List<FavoriteMovieEntity>> {
         return moviesDao.readFavoriteMovies()
     }
-
 
 
     suspend fun insertMovies(moviesEntity: MoviesEntity) {
         moviesDao.insertMovies(moviesEntity)
     }
 
-    suspend fun updateMovieWithTrailerUrl(movieId: String, trailerUrl: String) {
-        moviesDao.updateMovieWithTrailerUrl(movieId,trailerUrl)
+    fun updateMovieWithTrailerUrl(movieId: String, trailerUrl: String) {
+        moviesDao.updateMovieWithTrailerUrl(movieId, trailerUrl)
     }
 
     suspend fun readMovieTrailerUrl(id: String?): String? {

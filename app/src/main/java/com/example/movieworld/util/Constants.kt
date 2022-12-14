@@ -1,10 +1,11 @@
 package com.example.movieworld.util
 
-import com.example.movieworld.ui.fragments.movielist.GenresEnum
-
 object Constants {
 
+    // Bundle
     const val BUNDLE_ID = "id"
+    const val BUNDLE_TRAILER_URL = "trailerUrl"
+    const val BUNDLE_TITLE = "title"
     const val BUNDLE_MOVIE_BY_ID = "movieById"
 
     const val BASE_URL = "https://imdb-api.com/API/"

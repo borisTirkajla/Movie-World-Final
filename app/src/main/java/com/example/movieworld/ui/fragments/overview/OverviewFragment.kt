@@ -6,23 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.example.movieworld.R
 import com.example.movieworld.databinding.FragmentOverviewBinding
 import com.example.movieworld.models.moviebyid.BoxOffice
 import com.example.movieworld.models.moviebyid.Director
 import com.example.movieworld.models.moviebyid.Genre
 import com.example.movieworld.models.moviebyid.Writer
 import com.example.movieworld.ui.PlayerActivity
+import com.example.movieworld.util.Constants
 import com.example.movieworld.util.NetworkResult
 import com.example.movieworld.util.UrlResult
 import com.example.movieworld.viewmodels.DetailsViewModel
 import com.example.movieworld.viewmodels.TrailerViewModel
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -77,8 +75,8 @@ class OverviewFragment : Fragment() {
         }
 
 
-        trailerViewModel.trailerUrl.observe(viewLifecycleOwner) {
-            if (it.isNullOrEmpty() && trailerViewModel.shouldPlayTrailer) {
+        trailerViewModel.trailerUrl.observe(viewLifecycleOwner) { trailerUrl ->
+            if (trailerUrl.isNullOrEmpty() && trailerViewModel.shouldPlayTrailer) {
                 Snackbar.make(
                     binding.root,
                     "There is no trailer for this movie.",
@@ -86,13 +84,18 @@ class OverviewFragment : Fragment() {
                 ).show()
             } else if (trailerViewModel.shouldPlayTrailer) {
                 val i = Intent(requireContext(), PlayerActivity::class.java)
-                i.putExtra("trailerUrl", it)
-                i.putExtra("title", detailsViewModel.movieResponse.value?.data?.title)
+                i.putExtra(
+                    Constants.BUNDLE_TRAILER_URL,
+                    trailerUrl
+                )
+                i.putExtra(
+                    Constants.BUNDLE_TITLE,
+                    detailsViewModel.movieResponse.value?.data?.title
+                )
                 requireContext().startActivity(i)
             }
             trailerViewModel.shouldPlayTrailer = false
         }
-
         setupLayouts()
     }
 

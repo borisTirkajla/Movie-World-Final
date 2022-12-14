@@ -29,12 +29,9 @@ class FavoriteMoviesViewModel @Inject constructor(
             repository.local.insertFavoriteMovies(movie)
         }
 
-    fun deleteFavoriteMovie(movie: MovieById) =
+    fun deleteFavoriteMovie(movieById: MovieById) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.deleteFavoriteMovie(movie)
+            repository.local.deleteFavoriteMovie(movieById)
         }
 
-    fun deleteAllFavoriteMovies() = viewModelScope.launch(Dispatchers.IO) {
-        repository.local.deleteAllFavoriteMovies()
-    }
 }

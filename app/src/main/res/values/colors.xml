@@ -38,7 +38,7 @@
 
     <color name="statusBarColor">@color/black</color>
     <color name="contextualStatusBarColor">@color/darker</color>
-    <color name="contextualActionBarColor">@color/dark</color>
+<!--    <color name="contextualActionBarColor">@color/dark</color>-->
     <color name="actionBarBackgroundColor">@color/darkGray</color>
 
     // Custom BottomNavigationView Style
@@ -51,5 +51,6 @@
     <color name="backgroundCard">#adb5bd</color>
     <color name="background">#212529</color>
     <color name="dividerColor">#9A9A9A</color>
+    <color name="color_semitransparent">#4DFFFFFF</color>
 
 </resources>

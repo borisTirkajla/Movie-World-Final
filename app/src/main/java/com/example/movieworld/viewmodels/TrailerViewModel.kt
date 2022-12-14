@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TrailerViewModel @Inject constructor(
     private val repository: Repository
-): ViewModel() {
+) : ViewModel() {
 
     val trailerUrl: MutableLiveData<String?> =
         MutableLiveData()
@@ -20,7 +20,7 @@ class TrailerViewModel @Inject constructor(
     var shouldPlayTrailer = false
 
     fun getTrailerById(id: String) {
-        viewModelScope.launch (Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             val response = repository.remote.getTrailerById(id)
             if (response.isSuccessful) {
                 response.body()?.let { trailer ->
@@ -30,7 +30,7 @@ class TrailerViewModel @Inject constructor(
                             movieId = id,
                             trailerUrl = trailer.videoUrl
                         )
-                    }else{
+                    } else {
                         trailerUrl.postValue(null)
                     }
                 }

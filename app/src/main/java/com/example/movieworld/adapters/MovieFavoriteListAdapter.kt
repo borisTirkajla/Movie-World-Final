@@ -13,15 +13,20 @@ import com.example.movieworld.data.database.entities.FavoriteMovieEntity
 import com.example.movieworld.databinding.MovieRowLayoutBinding
 import com.example.movieworld.models.moviebygenre.Movie
 import com.example.movieworld.util.MovieDiffUtil
+import com.example.movieworld.util.TypeConvertor
+import com.example.movieworld.viewmodels.FavoriteMoviesViewModel
 
 class MovieFavoriteListAdapter(
     private val requireActivity: FragmentActivity,
+    private val favoriteMoviesViewModel: FavoriteMoviesViewModel,
     private val onItemClicked: (favMovieEntity: FavoriteMovieEntity) -> Unit
 ) :
     RecyclerView.Adapter<MovieFavoriteListAdapter.ViewHolder>(), ActionMode.Callback {
 
     private var multiSelection = false
+    private lateinit var mActionMode: ActionMode
     private var selectedMovies = arrayListOf<FavoriteMovieEntity>()
+    private var myViewHolder = arrayListOf<ViewHolder>()
     private var movieList = emptyList<FavoriteMovieEntity>()
 
     class ViewHolder(val binding: MovieRowLayoutBinding) :
@@ -41,20 +46,12 @@ class MovieFavoriteListAdapter(
                         binding.progressBar.isVisible = false
                     }
                 )
-//                .placeholder(R.drawable.loading_animation)
-//                .memoryCachePolicy(CachePolicy.DISABLED)
-//                .diskCachePolicy(CachePolicy.DISABLED)
                 .target(binding.imageViewPhoto)
                 .build()
             imageLoader.enqueue(request)
 
-            binding.movie =
-                Movie(
-                    id = favMovieEntity.id,
-                    image = favMovieEntity.movie.image,
-                    plot = favMovieEntity.movie.plot,
-                    title = favMovieEntity.movie.title ?: "Error: No Title Found."
-                )
+            val movie: Movie = TypeConvertor.favoriteMovieEntityToMovie(favMovieEntity)
+            binding.movie = movie
             binding.executePendingBindings()
         }
 
@@ -72,8 +69,10 @@ class MovieFavoriteListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        myViewHolder.add(holder)
         val currentMovie = movieList[position]
-//        holder.itemView.setOnClickListener {
+
+        /**ClickListener*/
         holder.binding.cardViewRow.setOnClickListener {
             if (multiSelection) {
                 applySelection(holder, currentMovie)
@@ -82,16 +81,14 @@ class MovieFavoriteListAdapter(
             }
         }
 
-        /**
-         * Long Click Listener
-         * */
-        holder.itemView.setOnLongClickListener {
+        /**Long ClickListener*/
+        holder.binding.cardViewRow.setOnLongClickListener {
             if (!multiSelection) {
                 multiSelection = true
                 requireActivity.startActionMode(this)
-                applySelection(holder,currentMovie)
+                applySelection(holder, currentMovie)
                 true
-            }else{
+            } else {
                 multiSelection = false
                 false
             }
@@ -102,26 +99,44 @@ class MovieFavoriteListAdapter(
     private fun applySelection(holder: ViewHolder, currentMovie: FavoriteMovieEntity) {
         if (selectedMovies.contains(currentMovie)) {
             selectedMovies.remove(currentMovie)
-            changeMovieStyle(holder, R.color.lightGray, R.color.lightMediumGray)
+            changeMovieStyle(
+                holder = holder,
+                isVisible = false,
+                strokeWidth = 2
+            )
+            applyActionModeTitle()
         } else {
             selectedMovies.add(currentMovie)
-            changeMovieStyle(holder, R.color.cardBackgroundLightColor, R.color.white)
+            changeMovieStyle(
+                holder = holder,
+                isVisible = true,
+                strokeWidth = 4
+            )
+            applyActionModeTitle()
         }
     }
 
-    private fun changeMovieStyle(holder: ViewHolder, backgroundColor: Int, strokeColor: Int) {
-//        holder.binding.constraintLayoutDetails.setBackgroundColor(
-//            ContextCompat.getColor(requireActivity, backgroundColor)
-//        )
-//        holder.binding.cardViewRow.strokeColor = R.color.white
-        holder.binding.cardViewRow.strokeWidth = 10
+    private fun applyActionModeTitle() {
+        when (selectedMovies.size) {
+            0 -> mActionMode.finish()
+            1 -> mActionMode.title = "${selectedMovies.size} item selected"
+            else -> mActionMode.title = "${selectedMovies.size} items selected"
+        }
+    }
+
+    private fun changeMovieStyle(holder: ViewHolder, isVisible: Boolean, strokeWidth: Int) {
+        holder.binding.viewSelectedItem.isVisible = isVisible
+        holder.binding.cardViewRow.strokeWidth = strokeWidth
     }
 
     override fun getItemCount() = movieList.size
 
     override fun onCreateActionMode(actionMode: ActionMode?, menu: Menu?): Boolean {
         actionMode?.menuInflater?.inflate(R.menu.favorites_contextual_menu, menu)
-        applyStatusBarColor(R.color.contextualActionBarColor)
+        if (actionMode != null) {
+            mActionMode = actionMode
+        }
+        applyStatusBarColor(R.color.statusBarColor)
         return true
     }
 
@@ -130,10 +145,28 @@ class MovieFavoriteListAdapter(
     }
 
     override fun onActionItemClicked(actionMode: ActionMode?, menu: MenuItem?): Boolean {
+        if (menu?.itemId == R.id.action_delete_favorite_movie) {
+            selectedMovies.forEach { movieEntity ->
+                val movieById = TypeConvertor.favoriteMovieEntityToMovieById(movieEntity)
+                favoriteMoviesViewModel.deleteFavoriteMovie(
+                    movieById = movieById
+                )
+            }
+            multiSelection = false
+            selectedMovies.clear()
+            actionMode?.finish()
+        }
         return true
     }
 
     override fun onDestroyActionMode(actionMode: ActionMode?) {
+        myViewHolder.forEach { holder ->
+            changeMovieStyle(
+                holder = holder,
+                isVisible = false,
+                strokeWidth = 2
+            )
+        }
         multiSelection = false
         selectedMovies.clear()
         applyStatusBarColor(R.color.statusBarColor)
@@ -151,4 +184,9 @@ class MovieFavoriteListAdapter(
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
+    fun clearContextualActionMode() {
+        if (this::mActionMode.isInitialized) {
+            mActionMode.finish()
+        }
+    }
 }

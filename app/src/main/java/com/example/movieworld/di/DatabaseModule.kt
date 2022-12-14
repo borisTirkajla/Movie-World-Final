@@ -19,8 +19,7 @@ object DatabaseModule {
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context
-    )
-    = Room.databaseBuilder(
+    ) = Room.databaseBuilder(
         context,
         MoviesDatabase::class.java,
         DATABASE_NAME
@@ -30,6 +29,5 @@ object DatabaseModule {
     @Provides
     fun provideDao(
         database: MoviesDatabase
-    )
-    = database.moviesDao()
+    ) = database.moviesDao()
 }

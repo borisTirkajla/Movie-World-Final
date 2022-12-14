@@ -22,7 +22,7 @@ class ActorsFragment : Fragment() {
     private val binding get() = _binding!!
     private val mAdapter by lazy {
         ActorsListAdapter { id ->
-            Toast.makeText(requireContext(),id,Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
         }
     }
 

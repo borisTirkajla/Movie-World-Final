@@ -77,6 +77,7 @@ class SimilarMoviesFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

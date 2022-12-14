@@ -7,7 +7,7 @@ import androidx.core.text.italic
 import androidx.databinding.BindingAdapter
 
 class ActorBinding {
-    companion object{
+    companion object {
         @BindingAdapter("actorNameInMovie")
         @JvmStatic
         fun actorNameInMovie(

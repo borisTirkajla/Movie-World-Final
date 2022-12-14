@@ -5,15 +5,15 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.movieworld.BuildConfig
 import com.example.movieworld.data.Repository
 import com.example.movieworld.models.moviebyid.MovieById
-import com.example.movieworld.util.*
+import com.example.movieworld.util.NetworkListener
+import com.example.movieworld.util.NetworkResponse
+import com.example.movieworld.util.NetworkResult
+import com.example.movieworld.util.UrlResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.collections.set
 
 private const val TAG = "DetailsViewModel"
 
@@ -27,8 +27,8 @@ class DetailsViewModel @Inject constructor(
         MutableLiveData()
 
     var movieId: String? = null
-//    val trailerUrl: MutableLiveData<UrlResult<String>> = MutableLiveData()
-var trailerUrl: UrlResult<String> = UrlResult.Loading()
+
+    var trailerUrl: UrlResult<String> = UrlResult.Loading()
 
     fun findMovieById(id: String) {
         viewModelScope.launch {
@@ -43,7 +43,6 @@ var trailerUrl: UrlResult<String> = UrlResult.Loading()
                 val response = repository.remote.getMovieById(id)
                 Log.d(TAG, response.toString())
                 movieResponse.value = NetworkResponse.handleMovieByIdResponse(response)
-//                movieId = movieResponse.value?.data?.id
             } catch (e: Exception) {
                 movieResponse.value = NetworkResult.Error(e.localizedMessage)
                 e.localizedMessage?.let { Log.d(TAG, it) }
@@ -52,7 +51,6 @@ var trailerUrl: UrlResult<String> = UrlResult.Loading()
             movieResponse.value = NetworkResult.Error("No Internet Connection.")
         }
     }
-
 
 
     fun readMovieTrailerUrl() {
@@ -67,16 +65,6 @@ var trailerUrl: UrlResult<String> = UrlResult.Loading()
             }
         }
     }
-
-    fun applySearchQuery(movieId: String): HashMap<String, Any> {
-        val queries: HashMap<String, Any> = HashMap()
-
-        queries[Constants.QUERY_API_KEY] = BuildConfig.IMDB_API_KEY
-        queries[Constants.QUERY_ID] = movieId
-
-        return queries
-    }
-
 
     fun setMovieResponseFromLocalDatabase(movie: MovieById) {
         movieResponse.value = NetworkResult.Success(movie)

@@ -21,9 +21,7 @@ class MainViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     /**ROOM DATABASE*/
-
     val readMovies: LiveData<List<MoviesEntity>> = repository.local.readMovies().asLiveData()
-//    val readFavoriteMovies: LiveData<List<FavoriteMovieEntity>> = repository.local.readFavoriteMovies().asLiveData()
 
     private fun insertMovies(moviesEntity: MoviesEntity) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,7 +31,6 @@ class MainViewModel @Inject constructor(
 
 
     /**RETROFIT*/
-
     var movieResponse: MutableLiveData<NetworkResult<MovieListResponse>> = MutableLiveData()
 
     fun getMovieByGenre(queries: Map<String, Any>) {
@@ -66,34 +63,4 @@ class MainViewModel @Inject constructor(
         val moviesEntity = MoviesEntity(movieListResponse)
         insertMovies(moviesEntity)
     }
-
-//    private fun handleMovieListResponse(response: Response<MovieListResponse>): NetworkResult<MovieListResponse> {
-//        when  {
-////            response.body()?.errorMessage?.isNotEmpty()!! -> {
-////                val k = 1
-////                return NetworkResult.Error(response.body()?.errorMessage.toString())
-////            }
-//            response.body()?.movies.isNullOrEmpty() -> {
-//                return NetworkResult.Error("Movies not found. ")
-//            }
-//            response.isSuccessful -> {
-//                return NetworkResult.Success(response.body()!!)
-//            }
-//            else -> return NetworkResult.Error(response.message())
-//        }
-//    }
-
-//    private fun hasInternetConnection(): Boolean {
-//        val connectivityManager = getApplication<Application>().getSystemService(
-//            Context.CONNECTIVITY_SERVICE
-//        ) as ConnectivityManager
-//        val activeNetwork = connectivityManager.activeNetwork ?: return false
-//        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-//        return when {
-//            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-//            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-//            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-//            else -> false
-//        }
-//    }
 }

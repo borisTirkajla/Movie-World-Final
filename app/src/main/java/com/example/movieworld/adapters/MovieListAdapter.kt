@@ -1,23 +1,19 @@
 package com.example.movieworld.adapters
 
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.imageLoader
 import coil.request.ImageRequest
-import com.example.movieworld.R
 import com.example.movieworld.databinding.MovieRowLayoutBinding
 import com.example.movieworld.models.moviebygenre.Movie
-import com.example.movieworld.ui.MainActivity
 import com.example.movieworld.util.MovieDiffUtil
 
-class MovieListAdapter(private val onItemClicked: (movie: Movie) -> Unit) :
-    RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
+class MovieListAdapter(
+    private val onItemClicked: (movie: Movie) -> Unit
+) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
     private var movieList = emptyList<Movie>()
 
@@ -30,8 +26,9 @@ class MovieListAdapter(private val onItemClicked: (movie: Movie) -> Unit) :
                 .data(movie.image)
                 .listener(
                     onStart = {
-                        binding.progressBar.isVisible = true},
-                    onSuccess = {_,_, ->
+                        binding.progressBar.isVisible = true
+                    },
+                    onSuccess = { _, _ ->
                         binding.progressBar.isVisible = false
                     }
                 )
@@ -76,5 +73,4 @@ class MovieListAdapter(private val onItemClicked: (movie: Movie) -> Unit) :
         movieList = newData
         diffUtilResult.dispatchUpdatesTo(this)
     }
-
 }

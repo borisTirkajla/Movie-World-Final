@@ -7,15 +7,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieworld.adapters.MovieFavoriteListAdapter
 import com.example.movieworld.data.database.entities.FavoriteMovieEntity
-import com.example.movieworld.models.moviebyid.MovieById
-import com.example.movieworld.util.NetworkResponse
-import com.example.movieworld.util.NetworkResult
-import com.facebook.shimmer.ShimmerFrameLayout
 
 class FavoriteMovieBinding {
-    companion object{
+    companion object {
 
-        @BindingAdapter("viewVisibility","setData", requireAll = false)
+        @BindingAdapter("viewVisibility", "setData", requireAll = false)
         @JvmStatic
         fun setDataAndViewVisibility(
             view: View,
@@ -34,7 +30,7 @@ class FavoriteMovieBinding {
                         view.visibility = View.INVISIBLE
                     }
                 }
-            }else{
+            } else {
                 when (view) {
                     is ImageView -> {
                         view.visibility = View.INVISIBLE
@@ -47,7 +43,6 @@ class FavoriteMovieBinding {
                         mAdapter?.setData(favoritesMovieList)
                     }
                 }
-
             }
         }
     }

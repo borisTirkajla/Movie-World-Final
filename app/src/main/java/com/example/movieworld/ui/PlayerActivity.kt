@@ -37,7 +37,7 @@ class PlayerActivity : YouTubeBaseActivity() {
                 p1: YouTubePlayer?,
                 p2: Boolean
             ) {
-//                p1?.setFullscreen(true)
+                p1?.setFullscreen(true)
                 p1?.loadVideo(mVideoUrl)
             }
 

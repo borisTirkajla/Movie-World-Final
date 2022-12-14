@@ -33,7 +33,10 @@ class FavoriteMoviesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mAdapter by lazy {
-        MovieFavoriteListAdapter(requireActivity = requireActivity()) { favoriteMovieEntity ->
+        MovieFavoriteListAdapter(
+            requireActivity = requireActivity(),
+            favoriteMoviesViewModel = favoriteMoviesViewModel
+        ) { favoriteMovieEntity ->
             try {
                 val action =
                     FavoriteMoviesFragmentDirections.actionFavoriteMoviesFragmentToDetailsFragment(
@@ -75,6 +78,7 @@ class FavoriteMoviesFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        mAdapter.clearContextualActionMode()
         _binding = null
     }
 }

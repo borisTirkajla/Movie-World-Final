@@ -1,7 +1,7 @@
 package com.example.di
 
-import com.example.movieworld.util.Constants.BASE_URL
 import com.example.movieworld.data.network.ImdbApi
+import com.example.movieworld.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

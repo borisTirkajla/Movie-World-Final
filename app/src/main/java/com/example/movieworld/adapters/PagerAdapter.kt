@@ -1,12 +1,10 @@
 package com.example.movieworld.adapters
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class PagerAdapter(
-//    private val resultBundle: Bundle,
     private val fragments: ArrayList<Fragment>,
     private val title: ArrayList<String>,
     fragmentManager: FragmentManager
@@ -16,7 +14,6 @@ class PagerAdapter(
     }
 
     override fun getItem(position: Int): Fragment {
-//        fragments[position].arguments = resultBundle
         return fragments[position]
     }
 

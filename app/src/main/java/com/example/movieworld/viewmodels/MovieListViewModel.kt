@@ -7,11 +7,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movieworld.BuildConfig
 import com.example.movieworld.data.DataStoreRepository
-import com.example.movieworld.ui.fragments.movielist.GenresEnum
-import com.example.movieworld.util.Constants
 import com.example.movieworld.util.Constants.DEFAULT_GENRE
 import com.example.movieworld.util.Constants.QUERY_API_KEY
 import com.example.movieworld.util.Constants.QUERY_GENRES
+import com.example.movieworld.util.GenresEnum
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +22,7 @@ class MovieListViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : AndroidViewModel(application) {
 
-    var genreType = DEFAULT_GENRE
+    private var genreType = DEFAULT_GENRE
     val readGenreType = dataStoreRepository.readGenreType()
     private var query: String? = null
     var networkStatus = false
@@ -39,8 +38,8 @@ class MovieListViewModel @Inject constructor(
         }
     }
 
-    fun saveBackOnline(backOnline: Boolean) {
-        viewModelScope.launch(Dispatchers.IO){
+    private fun saveBackOnline(backOnline: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.saveBackOnline(backOnline)
         }
     }
@@ -66,11 +65,11 @@ class MovieListViewModel @Inject constructor(
 
     fun showNetworkStatus() {
         if (!networkStatus) {
-            Toast.makeText(getApplication(),"No Internet Connection.",Toast.LENGTH_LONG).show()
+            Toast.makeText(getApplication(), "No Internet Connection.", Toast.LENGTH_LONG).show()
             saveBackOnline(true)
-        }else if (networkStatus) {
+        } else if (networkStatus) {
             if (backOnline) {
-                Toast.makeText(getApplication(),"We are online",Toast.LENGTH_LONG).show()
+                Toast.makeText(getApplication(), "We are online", Toast.LENGTH_LONG).show()
                 saveBackOnline(false)
             }
         }

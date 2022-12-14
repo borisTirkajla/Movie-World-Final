@@ -202,7 +202,6 @@ class MovieDetailsBinding {
                 is NetworkResult.Success -> viewPager.visibility = View.VISIBLE
                 null -> viewPager.visibility = View.INVISIBLE
             }
-
         }
     }
 }

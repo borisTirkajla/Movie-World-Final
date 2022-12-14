@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.imageLoader
 import coil.request.ImageRequest
-import com.example.movieworld.R
 import com.example.movieworld.databinding.SimilarMovieRowLayoutBinding
 import com.example.movieworld.models.moviebyid.Similar
 import com.example.movieworld.util.MovieDiffUtil
 
-class SimilarMoviesAdapter(private val onItemClicked: (id: String) -> Unit) :
-    RecyclerView.Adapter<SimilarMoviesAdapter.ViewHolder>() {
+class SimilarMoviesAdapter(
+    private val onItemClicked: (id: String) -> Unit
+) : RecyclerView.Adapter<SimilarMoviesAdapter.ViewHolder>() {
 
     private var movieList = emptyList<Similar>()
 
@@ -70,5 +70,4 @@ class SimilarMoviesAdapter(private val onItemClicked: (id: String) -> Unit) :
         movieList = newData
         diffUtilResult.dispatchUpdatesTo(this)
     }
-
 }

@@ -32,6 +32,7 @@
             app:strokeWidth="2dp">
 
             <LinearLayout
+                android:id="@+id/linear_layout_details"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -65,6 +66,7 @@
                         app:layout_constraintBottom_toBottomOf="@id/image_view_photo"
                         app:layout_constraintTop_toTopOf="@+id/image_view_photo"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_layout_details"
@@ -172,6 +174,19 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+
+        <View
+            android:id="@+id/view_selected_item"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="8dp"
+            android:visibility="invisible"
+            android:background="@color/color_semitransparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
